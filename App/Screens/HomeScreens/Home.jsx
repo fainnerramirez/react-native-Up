@@ -1,9 +1,18 @@
-import { View, Text, Image, StyleSheet } from "react-native";
-import { Button } from "react-native-paper";
+import { View, Text, Image, StyleSheet, Alert } from "react-native";
+import { Button, Dialog } from "react-native-paper";
+import { PopupGoogle } from "../../components/PopupGoogle";
+import { useState } from "react";
 
 export const Home = () => {
+  const [visible, setVisible] = useState(false);
+
+  const handleLoginGoogle = () => {
+    setVisible(true);
+  };
+
   return (
     <View>
+      {visible && <PopupGoogle />}
       <Image
         source={require("../../../assets/logo-up.png")}
         style={styles.logoImage}
@@ -16,9 +25,10 @@ export const Home = () => {
       <View style={styles.button}>
         <Text style={styles.subtitle}>Únete hoy</Text>
         <Button
+          style={styles.Btngoogle}
           icon="google"
           mode="outlined"
-          onPress={() => console.log("Pressed")}
+          onPress={handleLoginGoogle}
         >
           Ingresa con Google
         </Button>
@@ -40,7 +50,6 @@ export const styles = StyleSheet.create({
     borderRadius: 100,
     marginTop: 100,
   },
-
   title: {
     fontSize: 28,
     textAlign: "center",
@@ -50,13 +59,16 @@ export const styles = StyleSheet.create({
     marginTop: 20,
     fontSize: 25,
     textAlign: "left",
+    marginHorizontal: 8,
   },
-
   helperText: {
     fontSize: 12,
     marginHorizontal: 8,
   },
   button: {
     marginVertical: 10,
+  },
+  Btngoogle: {
+    borderColor: "blue",
   },
 });
