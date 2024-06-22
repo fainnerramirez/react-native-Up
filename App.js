@@ -1,20 +1,26 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { Platform, NativeModules } from "react-native";
+import { StyleSheet, Text, View } from "react-native";
+import { Home } from "./App/Screens/HomeScreens/Home";
+import { PaperProvider } from "react-native-paper";
 
-export default function App() {
+const { StatusBarManager } = NativeModules;
+
+export const App = () => {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <PaperProvider>
+      <View style={styles.container}>
+        <Home />
+      </View>
+    </PaperProvider>
   );
-}
+};
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+    marginHorizontal: 8,
+    marginTop: Platform.OS === "ios" ? 20 : StatusBarManager.HEIGHT,
   },
 });
+
+export default App;
